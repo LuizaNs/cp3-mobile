@@ -8,7 +8,7 @@ import { useState,useEffect } from 'react';
 
 export default function App() {
   const[title,setTitle]=useState('')
-  const[roupaList,setProdutoList]=useState([])
+  const[roupaList,setRoupaList]=useState([])
 
   const addItem = async() =>{
     try {
@@ -25,7 +25,7 @@ export default function App() {
   }
 
   const getItem = async () =>{
-    let roupas = []
+    let d = []
     const querySnapshot = await getDocs(collection(db, "roupas"));
     querySnapshot.forEach((doc) => {
       //console.log(doc.id , doc.data());
@@ -34,9 +34,9 @@ export default function App() {
         title:doc.data().title,
         isChecked:doc.data().isChecked
       }
-      roupas.push(roupa)
+      d.push(roupa)
     });
-    setProdutoList(roupas)
+    setRoupaList(d)
   }
 
   const deleteItemList = async()=>{
@@ -63,7 +63,7 @@ export default function App() {
         data={roupaList}
         renderItem={({item})=>(
           <Roupa 
-            title={item.title}
+            title={title}
             isChecked={item.isChecked}
             id={item.id}
             getItem={getItem}
